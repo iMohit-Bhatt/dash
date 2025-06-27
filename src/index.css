@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white bg-opacity-10 backdrop-blur-md border border-white border-opacity-20;
+  }
+  
+  .glass-dark {
+    @apply bg-black bg-opacity-20 backdrop-blur-md border border-white border-opacity-10;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-400 via-purple-500 to-green-400 bg-clip-text text-transparent;
+  }
+  
+  .gradient-bg {
+    @apply bg-gradient-to-br from-blue-600 via-purple-600 to-green-600;
+  }
+  
+  .gradient-border {
+    @apply border border-transparent bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-border;
+  }
+  
+  .btn-primary {
+    @apply px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-full 
+           shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 
+           hover:from-blue-600 hover:to-purple-600;
+  }
+  
+  .btn-secondary {
+    @apply px-8 py-4 bg-white bg-opacity-10 backdrop-blur-md border border-white border-opacity-20 text-white font-semibold rounded-full 
+           shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 
+           hover:bg-white hover:bg-opacity-20;
+  }
+  
+  .card {
+    @apply bg-white bg-opacity-5 backdrop-blur-md border border-white border-opacity-10 rounded-2xl p-6 
+           hover:bg-white hover:bg-opacity-10 hover:border-white hover:border-opacity-20 transition-all duration-300;
+  }
+  
+  .section {
+    @apply min-h-screen flex items-center justify-center relative overflow-hidden;
+  }
+  
+  .floating {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .floating-delay-1 {
+    animation: float 6s ease-in-out infinite 1s;
+  }
+  
+  .floating-delay-2 {
+    animation: float 6s ease-in-out infinite 2s;
+  }
+  
+  .floating-delay-3 {
+    animation: float 6s ease-in-out infinite 3s;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6, #d946ef);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2563eb, #c026d3);
+}
