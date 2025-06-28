@@ -6,11 +6,25 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 0;
+    margin: 0;
+    padding: 0;
+    height: 100%;
   }
   
   body {
     font-family: 'Inter', system-ui, sans-serif;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    min-height: 100vh;
+  }
+  
+  #root {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
   }
   
   * {
@@ -57,7 +71,7 @@
   }
   
   .section {
-    @apply min-h-screen flex items-center justify-center relative overflow-hidden;
+    @apply relative overflow-hidden;
   }
   
   .floating {
@@ -112,4 +126,13 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #2563eb, #c026d3);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }

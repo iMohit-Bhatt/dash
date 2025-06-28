@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, useInView } from 'framer-motion'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
@@ -17,8 +17,33 @@ function App() {
   const containerRef = useRef(null)
   const { scrollYProgress } = useScroll()
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
+  const [hasInitialized, setHasInitialized] = useState(false)
+
+  // Ensure page starts at the top only on initial load
+  useEffect(() => {
+    // Immediate scroll to top
+    window.scrollTo(0, 0)
+    
+    // Prevent scroll restoration
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual'
+    }
+    
+    // Set a flag to prevent further interference after initial load
+    const timer = setTimeout(() => {
+      setHasInitialized(true)
+    }, 1000)
+    
+    return () => clearTimeout(timer)
+  }, [])
 
   useGSAP(() => {
+    // Only ensure we start at the top if we haven't initialized yet
+    if (!hasInitialized) {
+      window.scrollTo(0, 0)
+      document.documentElement.scrollTop = 0
+    }
+    
     // Smooth scroll animations
     gsap.utils.toArray('.section').forEach((section, i) => {
       gsap.fromTo(section, 
@@ -37,7 +62,7 @@ function App() {
         }
       )
     })
-  }, [])
+  }, [hasInitialized])
 
   return (
     <div ref={containerRef} className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-x-hidden">

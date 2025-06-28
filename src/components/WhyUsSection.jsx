@@ -1,7 +1,19 @@
-import { motion } from 'framer-motion'
-import { Clock, DollarSign, Target, Zap, Shield, Users } from 'lucide-react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
+import { Clock, DollarSign, Target, Zap, Shield, Users, Sparkles } from 'lucide-react'
 
 const WhyUsSection = () => {
+  const sectionRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  })
+
+  // Parallax transforms
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '25%'])
+  const benefitsY = useTransform(scrollYProgress, [0, 1], ['0%', '-15%'])
+  const headerY = useTransform(scrollYProgress, [0, 1], ['0%', '-8%'])
+
   const benefits = [
     {
       icon: Clock,
@@ -10,9 +22,10 @@ const WhyUsSection = () => {
       description: "Get your dashboards up and running in days, not months. Our streamlined process ensures rapid deployment.",
       value: "10x",
       unit: "Faster",
-      color: "from-neon-cyan to-primary-500",
-      bgColor: "bg-neon-cyan/10",
-      borderColor: "border-neon-cyan/30"
+      color: "from-cyan-400 to-blue-500",
+      bgColor: "bg-cyan-500/10",
+      borderColor: "border-cyan-500/30",
+      glowColor: "rgba(6, 182, 212, 0.3)"
     },
     {
       icon: DollarSign,
@@ -21,9 +34,10 @@ const WhyUsSection = () => {
       description: "Reduce operational costs by automating manual processes and eliminating data entry errors.",
       value: "60%",
       unit: "Savings",
-      color: "from-neon-green to-accent-500",
-      bgColor: "bg-neon-green/10",
-      borderColor: "border-neon-green/30"
+      color: "from-green-400 to-emerald-500",
+      bgColor: "bg-green-500/10",
+      borderColor: "border-green-500/30",
+      glowColor: "rgba(34, 197, 94, 0.3)"
     },
     {
       icon: Target,
@@ -32,9 +46,10 @@ const WhyUsSection = () => {
       description: "Ensure data integrity with automated validation and real-time error detection systems.",
       value: "99.9%",
       unit: "Accuracy",
-      color: "from-neon-pink to-secondary-500",
-      bgColor: "bg-neon-pink/10",
-      borderColor: "border-neon-pink/30"
+      color: "from-pink-400 to-purple-500",
+      bgColor: "bg-pink-500/10",
+      borderColor: "border-pink-500/30",
+      glowColor: "rgba(236, 72, 153, 0.3)"
     }
   ]
 
@@ -61,45 +76,153 @@ const WhyUsSection = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.2,
+        delayChildren: 0.3
       }
     }
   }
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 50, scale: 0.9 },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    },
+    hover: {
+      y: -12,
+      scale: 1.03,
+      transition: {
+        duration: 0.3,
         ease: "easeOut"
       }
     }
   }
 
+  const iconVariants = {
+    initial: { rotate: 0, scale: 1 },
+    hover: { 
+      rotate: 360, 
+      scale: 1.15,
+      transition: {
+        duration: 0.8,
+        ease: "easeInOut"
+      }
+    }
+  }
+
+  const metricVariants = {
+    initial: { scale: 1 },
+    hover: { 
+      scale: 1.1,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const sparkleVariants = {
+    initial: { scale: 0, opacity: 0 },
+    animate: { 
+      scale: [0, 1, 0],
+      opacity: [0, 1, 0],
+      transition: {
+        duration: 1,
+        ease: "easeInOut"
+      }
+    }
+  }
+
   return (
-    <section className="section relative py-20">
-      <div className="container mx-auto px-4">
+    <section ref={sectionRef} className="section relative py-20 overflow-hidden" data-section="why-us">
+      {/* Ambient Background */}
+      <motion.div 
+        className="absolute inset-0"
+        style={{ y: backgroundY }}
+      >
+        <div className="absolute inset-0">
+          {/* Animated gradient orbs */}
+          <motion.div
+            className="absolute top-1/3 left-1/3 w-80 h-80 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full blur-3xl"
+            animate={{
+              x: [0, 40, 0],
+              y: [0, -40, 0],
+              scale: [1, 1.3, 1]
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-full blur-3xl"
+            animate={{
+              x: [0, -50, 0],
+              y: [0, 30, 0],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 3
+            }}
+          />
+          <motion.div
+            className="absolute top-1/2 left-1/2 w-72 h-72 bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-full blur-3xl"
+            animate={{
+              x: [0, 30, 0],
+              y: [0, -60, 0],
+              scale: [1, 1.4, 1]
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 6
+            }}
+          />
+        </div>
+      </motion.div>
+
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
+          style={{ y: headerY }}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-display font-bold text-white mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             Why Choose <span className="gradient-text">Us</span>
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             We combine cutting-edge technology with proven methodologies to deliver 
             exceptional results that drive real business value.
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Benefits Grid */}
         <motion.div
           className="grid md:grid-cols-3 gap-8 mb-16"
+          style={{ y: benefitsY }}
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -109,20 +232,49 @@ const WhyUsSection = () => {
               key={index}
               className="group relative"
               variants={cardVariants}
-              whileHover={{ y: -10 }}
-              transition={{ duration: 0.3 }}
+              whileHover="hover"
             >
-              <div className={`card h-full ${benefit.bgColor} ${benefit.borderColor} relative overflow-hidden`}>
+              <div className={`card h-full ${benefit.bgColor} ${benefit.borderColor} relative overflow-hidden backdrop-blur-sm`}>
+                {/* Glow Effect */}
+                <motion.div
+                  className="absolute inset-0 rounded-2xl"
+                  style={{
+                    background: `radial-gradient(circle at center, ${benefit.glowColor}, transparent 70%)`,
+                    opacity: 0
+                  }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
+                
                 {/* Background Gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${benefit.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+                
+                {/* Floating Sparkles */}
+                <div className="absolute inset-0 pointer-events-none">
+                  {Array.from({ length: 6 }, (_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-1 h-1 bg-white rounded-full"
+                      style={{
+                        left: `${15 + Math.random() * 70}%`,
+                        top: `${15 + Math.random() * 70}%`
+                      }}
+                      variants={sparkleVariants}
+                      initial="initial"
+                      whileHover="animate"
+                      transition={{ delay: i * 0.15 }}
+                    />
+                  ))}
+                </div>
                 
                 {/* Icon */}
                 <motion.div
                   className="relative z-10 mb-6"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
+                  variants={iconVariants}
+                  initial="initial"
+                  whileHover="hover"
                 >
-                  <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${benefit.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${benefit.color} flex items-center justify-center mb-4 shadow-lg`}>
                     <benefit.icon className="w-10 h-10 text-white" />
                   </div>
                 </motion.div>
@@ -130,9 +282,15 @@ const WhyUsSection = () => {
                 {/* Content */}
                 <div className="relative z-10">
                   <div className="mb-4">
-                    <h3 className="text-2xl font-bold text-white mb-1">
+                    <motion.h3 
+                      className="text-2xl font-bold text-white mb-1"
+                      whileHover={{ 
+                        textShadow: `0 0 20px ${benefit.glowColor}`,
+                        scale: 1.02
+                      }}
+                    >
                       {benefit.title}
-                    </h3>
+                    </motion.h3>
                     <div className="text-sm text-gray-400 uppercase tracking-wider">
                       {benefit.subtitle}
                     </div>
@@ -143,14 +301,25 @@ const WhyUsSection = () => {
                   </p>
 
                   {/* Metric */}
-                  <div className="text-center">
-                    <div className={`text-4xl font-bold bg-gradient-to-r ${benefit.color} bg-clip-text text-transparent mb-1`}>
+                  <motion.div 
+                    className="text-center"
+                    variants={metricVariants}
+                    initial="initial"
+                    whileHover="hover"
+                  >
+                    <motion.div 
+                      className={`text-4xl font-bold bg-gradient-to-r ${benefit.color} bg-clip-text text-transparent mb-1`}
+                      whileHover={{ 
+                        textShadow: `0 0 30px ${benefit.glowColor}`,
+                        scale: 1.1
+                      }}
+                    >
                       {benefit.value}
-                    </div>
+                    </motion.div>
                     <div className="text-sm text-gray-400">
                       {benefit.unit}
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Animated Border */}
@@ -158,7 +327,7 @@ const WhyUsSection = () => {
                   className={`absolute inset-0 rounded-2xl border-2 border-transparent bg-gradient-to-r ${benefit.color} opacity-0 group-hover:opacity-20 transition-opacity duration-300`}
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
-                ></motion.div>
+                />
               </div>
             </motion.div>
           ))}
@@ -178,18 +347,28 @@ const WhyUsSection = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -5 }}
             >
               <motion.div
-                className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300"
-                whileHover={{ rotate: 360 }}
+                className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg"
+                whileHover={{ 
+                  rotate: 360,
+                  scale: 1.1,
+                  boxShadow: "0 0 30px rgba(6, 182, 212, 0.5)"
+                }}
                 transition={{ duration: 0.6 }}
               >
                 <feature.icon className="w-8 h-8 text-white" />
               </motion.div>
-              <h3 className="text-xl font-semibold text-white mb-2">
+              <motion.h3 
+                className="text-xl font-semibold text-white mb-2"
+                whileHover={{ 
+                  textShadow: "0 0 20px rgba(6, 182, 212, 0.8)",
+                  scale: 1.02
+                }}
+              >
                 {feature.title}
-              </h3>
+              </motion.h3>
               <p className="text-gray-400 text-sm">
                 {feature.description}
               </p>
@@ -204,87 +383,91 @@ const WhyUsSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
         >
-          <h3 className="text-3xl font-bold text-white text-center mb-12">
-            Our <span className="gradient-text">Process</span>
-          </h3>
-          
           <div className="grid md:grid-cols-4 gap-8">
             {[
               { step: "01", title: "Discovery", desc: "Understand your needs" },
-              { step: "02", title: "Design", desc: "Create custom solutions" },
-              { step: "03", title: "Develop", desc: "Build and test" },
-              { step: "04", title: "Deploy", desc: "Launch and support" }
-            ].map((phase, index) => (
+              { step: "02", title: "Design", desc: "Create the solution" },
+              { step: "03", title: "Develop", desc: "Build & implement" },
+              { step: "04", title: "Deploy", desc: "Launch & support" }
+            ].map((item, index) => (
               <motion.div
                 key={index}
-                className="text-center relative"
+                className="text-center group"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                transition={{ delay: 0.8 + index * 0.1 }}
+                whileHover={{ scale: 1.05 }}
               >
-                {/* Step Number */}
-                <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-xl">
-                  {phase.step}
-                </div>
-                
-                {/* Title */}
-                <h4 className="text-lg font-semibold text-white mb-2">
-                  {phase.title}
-                </h4>
-                
-                {/* Description */}
-                <p className="text-gray-400 text-sm">
-                  {phase.desc}
-                </p>
-
-                {/* Connector Line */}
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-primary-500 to-secondary-500 opacity-30"></div>
-                )}
+                <motion.div
+                  className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"
+                  whileHover={{ 
+                    scale: 1.1,
+                    boxShadow: "0 0 30px rgba(168, 85, 247, 0.5)"
+                  }}
+                >
+                  <span className="text-white font-bold text-lg">{item.step}</span>
+                </motion.div>
+                <motion.h4 
+                  className="text-lg font-semibold text-white mb-1"
+                  whileHover={{ 
+                    textShadow: "0 0 15px rgba(168, 85, 247, 0.8)",
+                    scale: 1.02
+                  }}
+                >
+                  {item.title}
+                </motion.h4>
+                <p className="text-gray-400 text-sm">{item.desc}</p>
               </motion.div>
             ))}
           </div>
         </motion.div>
 
-        {/* CTA Section */}
-        <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-        >
-          <motion.button
-            className="btn-primary flex items-center gap-3 mx-auto group"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Zap className="w-5 h-5 group-hover:scale-110 transition-transform" />
-            Start Your Transformation Today
-          </motion.button>
-        </motion.div>
-
-        {/* Floating Elements */}
+        {/* Enhanced Floating Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <motion.div
-            className="absolute top-1/3 left-20 text-3xl opacity-10"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            className="absolute top-10 right-10 text-5xl opacity-10"
+            animate={{ 
+              rotate: 360,
+              scale: [1, 1.2, 1]
+            }}
+            transition={{ 
+              duration: 15, 
+              repeat: Infinity, 
+              ease: "linear",
+              scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
+            }}
           >
             ⚡
           </motion.div>
           <motion.div
-            className="absolute bottom-1/3 right-20 text-2xl opacity-10"
-            animate={{ y: [0, -15, 0] }}
-            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            className="absolute bottom-10 left-10 text-4xl opacity-10"
+            animate={{ 
+              y: [0, -15, 0],
+              rotate: [0, 10, 0]
+            }}
+            transition={{ 
+              duration: 5, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: 2
+            }}
           >
             🎯
           </motion.div>
           <motion.div
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl opacity-5"
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-1/2 right-10 text-3xl opacity-10"
+            animate={{ 
+              x: [0, -20, 0],
+              opacity: [0.1, 0.4, 0.1]
+            }}
+            transition={{ 
+              duration: 7, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: 4
+            }}
           >
-            💎
+            💰
           </motion.div>
         </div>
       </div>

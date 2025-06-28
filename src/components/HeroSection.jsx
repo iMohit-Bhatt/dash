@@ -22,9 +22,13 @@ const HeroSection = () => {
   const scrollToDashboard = () => {
     const dashboardSection = document.querySelector('[data-section="dashboard"]')
     if (dashboardSection) {
-      dashboardSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      // Use offsetTop to get the absolute position from the top of the document
+      const targetPosition = dashboardSection.offsetTop
+      
+      // Scroll to the exact position where the dashboard section starts
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
       })
     }
   }
@@ -32,9 +36,11 @@ const HeroSection = () => {
   const scrollToContact = () => {
     const contactSection = document.querySelector('[data-section="contact"]')
     if (contactSection) {
-      contactSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
+      const targetPosition = contactSection.offsetTop
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
       })
     }
   }
@@ -63,7 +69,7 @@ const HeroSection = () => {
   }
 
   return (
-    <section ref={sectionRef} className="section relative min-h-screen overflow-hidden">
+    <section ref={sectionRef} className="section relative min-h-screen overflow-hidden" data-section="hero">
       {/* Ambient Background with Parallax */}
       <motion.div 
         className="absolute inset-0"
@@ -82,7 +88,7 @@ const HeroSection = () => {
 
       {/* Main Content Container */}
       <motion.div
-        className="container mx-auto px-4 text-center relative z-10 h-screen flex flex-col justify-center items-center"
+        className="container mx-auto px-4 text-center relative z-10 min-h-screen flex flex-col justify-center items-center py-20"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
