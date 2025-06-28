@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
-import { BarChart3, TrendingUp, PieChart, Activity } from 'lucide-react'
+import { BarChart3, TrendingUp, Users, Target, Zap, Shield, Clock, Award } from 'lucide-react'
 
 const DashboardDemo = () => {
   const sectionRef = useRef(null)
@@ -9,216 +9,243 @@ const DashboardDemo = () => {
     offset: ["start end", "end start"]
   })
 
-  const textY = useTransform(scrollYProgress, [0, 0.5], [100, 0])
-  const textOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1])
-  const chartScale = useTransform(scrollYProgress, [0.2, 0.8], [0.8, 1])
-  const chartOpacity = useTransform(scrollYProgress, [0.2, 0.6], [0, 1])
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100])
+  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0])
+
+  const stats = [
+    { icon: Users, value: "200+", label: "Clients Served", color: "from-yellow-500 to-yellow-400" },
+    { icon: Clock, value: "16+", label: "Years Experience", color: "from-yellow-400 to-yellow-300" },
+    { icon: Award, value: "100%", label: "Client Satisfaction", color: "from-yellow-300 to-yellow-200" },
+    { icon: Zap, value: "24/7", label: "Support Available", color: "from-yellow-200 to-yellow-100" }
+  ]
+
+  const services = [
+    {
+      icon: Shield,
+      title: "Data Integration",
+      description: "Ensuring complete, accurate, and timely data, we integrate and consolidate your business' data sources into a cohesive model, from a few spreadsheets to millions of rows of data.",
+      color: "from-yellow-500 to-yellow-400"
+    },
+    {
+      icon: TrendingUp,
+      title: "Data Analysis & Alignment",
+      description: "Executing deep data analysis, we turn raw data into valuable business insights, helping you align your data with your goals and initiatives for maximum ROI.",
+      color: "from-yellow-400 to-yellow-300"
+    },
+    {
+      icon: BarChart3,
+      title: "Data Visualization",
+      description: "We turn static spreadsheets and confusing dashboards into vivid, clear data visualizations that help you better use and understand your data.",
+      color: "from-yellow-300 to-yellow-200"
+    }
+  ]
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  }
 
   return (
-    <section ref={sectionRef} data-section="dashboard" className="section relative py-20">
-      <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Text Content */}
+    <section ref={sectionRef} className="section-warm relative py-32 overflow-hidden" data-section="dashboard">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-yellow-900/5 to-transparent" />
+      
+      {/* Floating Particles */}
+      <div className="absolute inset-0 pointer-events-none">
+        {Array.from({ length: 20 }, (_, i) => (
           <motion.div
-            style={{ y: textY, opacity: textOpacity }}
-            className="space-y-8"
-          >
-            <motion.h2
-              className="text-4xl md:text-5xl font-display font-bold text-white mb-6"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              Watch Your <span className="gradient-text">Data Come Alive</span>
-            </motion.h2>
+            key={i}
+            className="absolute w-1 h-1 bg-yellow-400/30 rounded-full"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -50, 0],
+              opacity: [0, 1, 0],
+              scale: [0, 1, 0]
+            }}
+            transition={{
+              duration: 8 + Math.random() * 4,
+              repeat: Infinity,
+              delay: Math.random() * 5,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
 
-            <motion.p
-              className="text-xl text-gray-300 leading-relaxed"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Transform your raw Excel data into interactive, real-time dashboards that tell compelling stories. 
-              Our solutions turn complex data into actionable insights with stunning visualizations.
-            </motion.p>
-
-            <motion.div
-              className="space-y-4"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <div className="flex items-center gap-3 text-gray-300">
-                <div className="w-2 h-2 bg-cyan-500 rounded-full"></div>
-                <span>Real-time data synchronization</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-300">
-                <div className="w-2 h-2 bg-pink-500 rounded-full"></div>
-                <span>Interactive charts and filters</span>
-              </div>
-              <div className="flex items-center gap-3 text-gray-300">
-                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                <span>Automated reporting workflows</span>
-              </div>
-            </motion.div>
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header Section */}
+        <motion.div
+          className="text-center mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.div variants={itemVariants} className="mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 glass-warm rounded-full mb-6">
+              <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+              <span className="text-yellow-100 text-sm font-medium tracking-wide">Trusted by 200+ Clients</span>
+            </div>
           </motion.div>
 
-          {/* Dashboard Preview */}
-          <motion.div
-            style={{ scale: chartScale, opacity: chartOpacity }}
-            className="relative"
+          <motion.h2 
+            className="text-4xl md:text-6xl font-display font-bold mb-8 gradient-text-warm"
+            variants={itemVariants}
           >
-            {/* Excel Sheet Background */}
+            We make your data clear and useful, and your decisions data-driven.
+          </motion.h2>
+
+          <motion.p 
+            className="text-xl text-yellow-50 mb-12 max-w-3xl mx-auto leading-relaxed font-body"
+            variants={itemVariants}
+          >
+            Partner with former <span className="text-yellow-400 font-semibold">BCG, McKinsey, and Bain</span> Analytics Consultants.
+          </motion.p>
+        </motion.div>
+
+        {/* Stats Section */}
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {stats.map((stat, index) => (
             <motion.div
-              className="absolute inset-0 bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl border border-white border-opacity-10"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
+              key={index}
+              className="text-center group"
+              variants={itemVariants}
             >
-              {/* Excel Grid */}
-              <div className="p-6">
-                <div className="grid grid-cols-6 gap-1 text-xs text-white text-opacity-60">
-                  {Array.from({ length: 24 }, (_, i) => (
-                    <div key={i} className="h-6 bg-white bg-opacity-5 rounded flex items-center justify-center">
-                      {i < 6 ? String.fromCharCode(65 + i) : Math.floor(Math.random() * 1000)}
-                    </div>
-                  ))}
-                </div>
+              <motion.div
+                className="w-16 h-16 mx-auto mb-4 glass-warm rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+                whileHover={{ 
+                  boxShadow: "0 0 30px rgba(212, 175, 55, 0.3)",
+                  transition: { duration: 0.3 }
+                }}
+              >
+                <stat.icon className="w-8 h-8 text-yellow-400" />
+              </motion.div>
+              <div className={`text-3xl font-bold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                {stat.value}
               </div>
+              <div className="text-yellow-200 text-sm font-medium">{stat.label}</div>
             </motion.div>
+          ))}
+        </motion.div>
 
-            {/* Dashboard Overlay */}
+        {/* Services Section */}
+        <motion.div
+          className="grid md:grid-cols-3 gap-8 mb-20"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {services.map((service, index) => (
             <motion.div
-              className="relative bg-gradient-to-br from-slate-800 bg-opacity-90 to-slate-900 bg-opacity-90 backdrop-blur-md rounded-2xl p-6 border border-white border-opacity-20 shadow-2xl"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 1 }}
+              key={index}
+              className="card-premium group"
+              variants={itemVariants}
+              whileHover={{ 
+                y: -10,
+                transition: { duration: 0.3 }
+              }}
             >
-              {/* Dashboard Header */}
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-semibold text-white">Sales Dashboard</h3>
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                </div>
-              </div>
+              <motion.div
+                className={`w-16 h-16 mb-6 bg-gradient-to-r ${service.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                whileHover={{ 
+                  boxShadow: "0 0 30px rgba(212, 175, 55, 0.4)",
+                  transition: { duration: 0.3 }
+                }}
+              >
+                <service.icon className="w-8 h-8 text-white" />
+              </motion.div>
+              
+              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-yellow-200 transition-colors duration-300">
+                {service.title}
+              </h3>
+              
+              <p className="text-yellow-50 leading-relaxed font-body">
+                {service.description}
+              </p>
 
-              {/* Charts Grid */}
-              <div className="grid grid-cols-2 gap-4">
-                {/* Bar Chart */}
-                <motion.div
-                  className="bg-white bg-opacity-5 rounded-lg p-4"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="flex items-center gap-2 mb-3">
-                    <BarChart3 className="w-4 h-4 text-cyan-500" />
-                    <span className="text-sm text-white text-opacity-80">Revenue Trend</span>
-                  </div>
-                  <div className="flex items-end gap-1 h-16">
-                    {[20, 35, 25, 45, 30, 55, 40].map((height, i) => (
-                      <motion.div
-                        key={i}
-                        className="bg-gradient-to-t from-cyan-500 to-blue-500 rounded-t"
-                        style={{ height: `${height}%`, width: '12px' }}
-                        initial={{ height: 0 }}
-                        whileInView={{ height: `${height}%` }}
-                        transition={{ duration: 0.8, delay: i * 0.1 + 1.5 }}
-                      />
-                    ))}
-                  </div>
-                </motion.div>
-
-                {/* Pie Chart */}
-                <motion.div
-                  className="bg-white bg-opacity-5 rounded-lg p-4"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="flex items-center gap-2 mb-3">
-                    <PieChart className="w-4 h-4 text-pink-500" />
-                    <span className="text-sm text-white text-opacity-80">Market Share</span>
-                  </div>
-                  <div className="relative w-16 h-16 mx-auto">
-                    <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 32 32">
-                      <circle
-                        cx="16"
-                        cy="16"
-                        r="14"
-                        fill="none"
-                        stroke="rgba(255,255,255,0.1)"
-                        strokeWidth="2"
-                      />
-                      <motion.circle
-                        cx="16"
-                        cy="16"
-                        r="14"
-                        fill="none"
-                        stroke="#d946ef"
-                        strokeWidth="2"
-                        strokeDasharray="44 100"
-                        strokeDashoffset="44"
-                        initial={{ strokeDashoffset: 44 }}
-                        whileInView={{ strokeDashoffset: 0 }}
-                        transition={{ duration: 1, delay: 2 }}
-                      />
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center text-xs text-white">
-                      44%
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Line Chart */}
-                <motion.div
-                  className="bg-white bg-opacity-5 rounded-lg p-4 col-span-2"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <div className="flex items-center gap-2 mb-3">
-                    <TrendingUp className="w-4 h-4 text-yellow-500" />
-                    <span className="text-sm text-white text-opacity-80">Growth Metrics</span>
-                  </div>
-                  <div className="relative h-12">
-                    <svg className="w-full h-full" viewBox="0 0 100 20">
-                      <motion.path
-                        d="M0,15 L20,10 L40,8 L60,5 L80,3 L100,1"
-                        fill="none"
-                        stroke="#fbbf24"
-                        strokeWidth="2"
-                        initial={{ pathLength: 0 }}
-                        whileInView={{ pathLength: 1 }}
-                        transition={{ duration: 1.5, delay: 2.5 }}
-                      />
-                    </svg>
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* KPI Cards */}
-              <div className="grid grid-cols-3 gap-4 mt-4">
-                {[
-                  { label: "Revenue", value: "$2.4M", change: "+12%", color: "text-cyan-500" },
-                  { label: "Orders", value: "1,234", change: "+8%", color: "text-pink-500" },
-                  { label: "Growth", value: "24%", change: "+5%", color: "text-yellow-500" }
-                ].map((kpi, i) => (
+              {/* Hover Sparkles */}
+              <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {Array.from({ length: 3 }, (_, i) => (
                   <motion.div
                     key={i}
-                    className="bg-white bg-opacity-5 rounded-lg p-3 text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 3 + i * 0.1 }}
-                  >
-                    <div className={`text-lg font-bold ${kpi.color}`}>{kpi.value}</div>
-                    <div className="text-xs text-white text-opacity-60">{kpi.label}</div>
-                    <div className="text-xs text-green-400">{kpi.change}</div>
-                  </motion.div>
+                    className="absolute w-1 h-1 bg-yellow-400 rounded-full"
+                    style={{
+                      left: `${20 + i * 30}%`,
+                      top: `${20 + i * 20}%`,
+                    }}
+                    animate={{
+                      scale: [0, 1, 0],
+                      opacity: [0, 1, 0]
+                    }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      delay: i * 0.2
+                    }}
+                  />
                 ))}
               </div>
             </motion.div>
+          ))}
+        </motion.div>
+
+        {/* CTA Section */}
+        <motion.div
+          className="text-center"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.div variants={itemVariants}>
+            <motion.button
+              className="btn-primary-warm group relative overflow-hidden"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                <Target className="w-5 h-5" />
+                Book Call with Analytics Expert
+              </span>
+              
+              {/* Animated Background */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-yellow-600 to-yellow-500 rounded-full"
+                initial={{ scale: 0 }}
+                whileHover={{ scale: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.button>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

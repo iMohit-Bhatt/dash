@@ -1,184 +1,161 @@
 import { motion } from 'framer-motion'
 import { useSpring, animated } from 'react-spring'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 const AmbientBackground = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const containerRef = useRef(null)
+
+  // Animated gradient orbs with warm colors
+  const orb1 = useSpring({
+    from: { x: 0, y: 0 },
+    to: async (next) => {
+      while (true) {
+        await next({ x: Math.random() * 100, y: Math.random() * 100 })
+        await new Promise(resolve => setTimeout(resolve, 8000))
+      }
+    },
+    config: { mass: 1, tension: 120, friction: 14 }
+  })
+
+  const orb2 = useSpring({
+    from: { x: 100, y: 100 },
+    to: async (next) => {
+      while (true) {
+        await next({ x: Math.random() * 100, y: Math.random() * 100 })
+        await new Promise(resolve => setTimeout(resolve, 12000))
+      }
+    },
+    config: { mass: 1.5, tension: 100, friction: 20 }
+  })
+
+  const orb3 = useSpring({
+    from: { x: 50, y: 50 },
+    to: async (next) => {
+      while (true) {
+        await next({ x: Math.random() * 100, y: Math.random() * 100 })
+        await new Promise(resolve => setTimeout(resolve, 15000))
+      }
+    },
+    config: { mass: 2, tension: 80, friction: 25 }
+  })
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 2 - 1,
-        y: (e.clientY / window.innerHeight) * 2 - 1
-      })
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect()
+        const x = ((e.clientX - rect.left) / rect.width) * 100
+        const y = ((e.clientY - rect.top) / rect.height) * 100
+        setMousePosition({ x, y })
+      }
     }
 
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  // Animated gradient blobs
-  const blob1 = useSpring({
-    from: { x: 0, y: 0 },
-    to: async (next) => {
-      while (true) {
-        await next({ x: 100, y: 50 })
-        await next({ x: 0, y: 0 })
-      }
-    },
-    config: { duration: 8000 }
-  })
-
-  const blob2 = useSpring({
-    from: { x: 0, y: 0 },
-    to: async (next) => {
-      while (true) {
-        await next({ x: -80, y: -30 })
-        await next({ x: 0, y: 0 })
-      }
-    },
-    config: { duration: 12000 }
-  })
-
-  const blob3 = useSpring({
-    from: { x: 0, y: 0 },
-    to: async (next) => {
-      while (true) {
-        await next({ x: 60, y: -60 })
-        await next({ x: 0, y: 0 })
-      }
-    },
-    config: { duration: 10000 }
-  })
-
-  // Matrix-style characters
-  const matrixChars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'
-  const matrixColumns = 20
-  const matrixRows = 15
+  // Generate particles with warm colors
+  const particles = Array.from({ length: 50 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 4 + 1,
+    speed: Math.random() * 2 + 0.5,
+    delay: Math.random() * 5,
+    color: [
+      'bg-amber-400/20',
+      'bg-orange-400/20', 
+      'bg-red-400/20',
+      'bg-amber-500/20',
+      'bg-orange-500/20'
+    ][Math.floor(Math.random() * 5)]
+  }))
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Animated Gradient Blobs */}
+    <div 
+      ref={containerRef}
+      className="absolute inset-0 overflow-hidden pointer-events-none"
+    >
+      {/* Animated Gradient Orbs */}
       <animated.div
+        className="absolute w-96 h-96 bg-gradient-to-r from-amber-500/30 to-orange-500/30 rounded-full blur-3xl"
         style={{
-          transform: blob1.x.to(x => `translate(${x}px, ${blob1.y.get()}px)`)
+          left: orb1.x.to(x => `${x}%`),
+          top: orb1.y.to(y => `${y}%`),
+          transform: 'translate(-50%, -50%)'
         }}
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-cyan-500/30 to-blue-500/30 rounded-full blur-3xl mix-blend-multiply"
       />
       
       <animated.div
+        className="absolute w-80 h-80 bg-gradient-to-r from-orange-500/25 to-red-500/25 rounded-full blur-3xl"
         style={{
-          transform: blob2.x.to(x => `translate(${x}px, ${blob2.y.get()}px)`)
+          left: orb2.x.to(x => `${x}%`),
+          top: orb2.y.to(y => `${y}%`),
+          transform: 'translate(-50%, -50%)'
         }}
-        className="absolute top-1/3 right-1/3 w-80 h-80 bg-gradient-to-r from-purple-500/30 to-pink-500/30 rounded-full blur-3xl mix-blend-multiply"
       />
       
       <animated.div
+        className="absolute w-72 h-72 bg-gradient-to-r from-red-500/20 to-amber-400/20 rounded-full blur-3xl"
         style={{
-          transform: blob3.x.to(x => `translate(${x}px, ${blob3.y.get()}px)`)
+          left: orb3.x.to(x => `${x}%`),
+          top: orb3.y.to(y => `${y}%`),
+          transform: 'translate(-50%, -50%)'
         }}
-        className="absolute bottom-1/4 left-1/2 w-72 h-72 bg-gradient-to-r from-green-500/30 to-yellow-500/30 rounded-full blur-3xl mix-blend-multiply"
       />
 
-      {/* Matrix-style Data Stream */}
-      <div className="absolute inset-0">
-        {Array.from({ length: matrixColumns }, (_, colIndex) => (
-          <motion.div
-            key={colIndex}
-            className="absolute top-0 text-xs text-cyan-500/20 font-mono"
-            style={{
-              left: `${(colIndex / matrixColumns) * 100}%`,
-              animationDelay: `${colIndex * 0.1}s`
-            }}
-            animate={{
-              y: [0, window.innerHeight + 100]
-            }}
-            transition={{
-              duration: 8 + Math.random() * 4,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          >
-            {Array.from({ length: matrixRows }, (_, rowIndex) => (
-              <motion.div
-                key={rowIndex}
-                className="mb-2"
-                animate={{
-                  opacity: [0, 1, 0]
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: rowIndex * 0.1 + colIndex * 0.05
-                }}
-              >
-                {matrixChars[Math.floor(Math.random() * matrixChars.length)]}
-              </motion.div>
-            ))}
-          </motion.div>
-        ))}
-      </div>
+      {/* Floating Particles */}
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          className={`absolute ${particle.color} rounded-full`}
+          style={{
+            left: `${particle.x}%`,
+            top: `${particle.y}%`,
+            width: `${particle.size}px`,
+            height: `${particle.size}px`
+          }}
+          animate={{
+            y: [0, -100, 0],
+            opacity: [0, 1, 0],
+            scale: [0, 1, 0]
+          }}
+          transition={{
+            duration: particle.speed * 10,
+            repeat: Infinity,
+            delay: particle.delay,
+            ease: "easeInOut"
+          }}
+        />
+      ))}
 
-      {/* Floating Data Particles */}
-      <div className="absolute inset-0">
-        {Array.from({ length: 50 }, (_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-cyan-500/30 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`
-            }}
-            animate={{
-              y: [0, -100, 0],
-              opacity: [0, 1, 0],
-              scale: [0, 1, 0]
-            }}
-            transition={{
-              duration: 4 + Math.random() * 3,
-              repeat: Infinity,
-              delay: Math.random() * 2
-            }}
-          />
-        ))}
-      </div>
-
-      {/* 3D Light Scan Wave */}
+      {/* Mouse-following glow effect */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent"
+        className="absolute w-64 h-64 bg-gradient-to-r from-amber-400/10 to-orange-400/10 rounded-full blur-2xl"
         animate={{
-          x: ['-100%', '100%']
+          left: `${mousePosition.x}%`,
+          top: `${mousePosition.y}%`
         }}
         transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "linear"
+          type: "spring",
+          stiffness: 50,
+          damping: 20
+        }}
+        style={{
+          transform: 'translate(-50%, -50%)'
         }}
       />
 
-      {/* Interactive Grid */}
-      <div className="absolute inset-0 opacity-10">
-        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <defs>
-            <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-              <path d="M 10 0 L 0 0 0 10" fill="none" stroke="cyan" strokeWidth="0.1"/>
-            </pattern>
-          </defs>
-          <rect width="100" height="100" fill="url(#grid)" />
-        </svg>
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            linear-gradient(rgba(251, 191, 36, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(251, 191, 36, 0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '50px 50px'
+        }} />
       </div>
-
-      {/* Parallax Depth Layer */}
-      <motion.div
-        className="absolute inset-0"
-        style={{
-          transform: `translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)`,
-          transition: 'transform 0.1s ease-out'
-        }}
-      >
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-2xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-gradient-to-r from-green-500/20 to-yellow-500/20 rounded-full blur-2xl" />
-      </motion.div>
     </div>
   )
 }

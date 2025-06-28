@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HeroSection from './components/HeroSection'
 import DashboardDemo from './components/DashboardDemo'
 import ServicesSection from './components/ServicesSection'
-import TestimonialsSection from './components/TestimonialsSection'
+import Testimonials from './components/Testimonials'
 import WhyUsSection from './components/WhyUsSection'
 import ContactSection from './components/ContactSection'
 import FloatingCTA from './components/FloatingCTA'
@@ -44,28 +44,65 @@ function App() {
       document.documentElement.scrollTop = 0
     }
     
-    // Smooth scroll animations
+    // Smooth scroll animations with better performance
     gsap.utils.toArray('.section').forEach((section, i) => {
       gsap.fromTo(section, 
-        { opacity: 0, y: 100 },
+        { opacity: 0, y: 50 },
         { 
           opacity: 1, 
           y: 0, 
-          duration: 1,
+          duration: 1.2,
           ease: "power2.out",
           scrollTrigger: {
             trigger: section,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse"
+            start: "top 85%",
+            end: "bottom 15%",
+            toggleActions: "play none none reverse",
+            markers: false
           }
         }
       )
     })
+
+    // Smooth parallax effect for background elements
+    gsap.to('.floating', {
+      y: -30,
+      duration: 6,
+      ease: "power1.inOut",
+      yoyo: true,
+      repeat: -1
+    })
+
+    gsap.to('.floating-delay-1', {
+      y: -20,
+      duration: 8,
+      ease: "power1.inOut",
+      yoyo: true,
+      repeat: -1,
+      delay: 1
+    })
+
+    gsap.to('.floating-delay-2', {
+      y: -25,
+      duration: 7,
+      ease: "power1.inOut",
+      yoyo: true,
+      repeat: -1,
+      delay: 2
+    })
+
+    gsap.to('.floating-delay-3', {
+      y: -15,
+      duration: 9,
+      ease: "power1.inOut",
+      yoyo: true,
+      repeat: -1,
+      delay: 3
+    })
   }, [hasInitialized])
 
   return (
-    <div ref={containerRef} className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-x-hidden">
+    <div ref={containerRef} className="relative min-h-screen overflow-x-hidden">
       {/* Animated Background */}
       <motion.div 
         className="fixed inset-0 opacity-30"
@@ -73,10 +110,10 @@ function App() {
       >
         <div className="absolute inset-0 bg-data-pattern opacity-20"></div>
         <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-20 left-20 w-72 h-72 bg-blue-500 bg-opacity-20 rounded-full blur-3xl floating"></div>
-          <div className="absolute top-40 right-20 w-96 h-96 bg-purple-500 bg-opacity-20 rounded-full blur-3xl floating-delay-1"></div>
-          <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-green-500 bg-opacity-20 rounded-full blur-3xl floating-delay-2"></div>
-          <div className="absolute bottom-40 right-1/3 w-64 h-64 bg-cyan-500 bg-opacity-20 rounded-full blur-3xl floating-delay-3"></div>
+          <div className="absolute top-20 left-20 w-72 h-72 bg-yellow-500 bg-opacity-20 rounded-full blur-3xl floating"></div>
+          <div className="absolute top-40 right-20 w-96 h-96 bg-yellow-400 bg-opacity-20 rounded-full blur-3xl floating-delay-1"></div>
+          <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-yellow-300 bg-opacity-20 rounded-full blur-3xl floating-delay-2"></div>
+          <div className="absolute bottom-40 right-1/3 w-64 h-64 bg-yellow-200 bg-opacity-20 rounded-full blur-3xl floating-delay-3"></div>
         </div>
       </motion.div>
 
@@ -85,7 +122,7 @@ function App() {
         <HeroSection />
         <DashboardDemo />
         <ServicesSection />
-        <TestimonialsSection />
+        <Testimonials />
         <WhyUsSection />
         <ContactSection />
       </div>
@@ -95,7 +132,7 @@ function App() {
 
       {/* Scroll Progress Indicator */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-500 to-yellow-400 origin-left z-50"
         style={{ scaleX: scrollYProgress }}
       />
     </div>
