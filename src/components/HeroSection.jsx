@@ -1,7 +1,44 @@
-import { motion } from 'framer-motion'
-import { MessageCircle, BarChart3, ChevronDown } from 'lucide-react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef } from 'react'
+import AmbientBackground from './AmbientBackground'
+import DataNetwork from './DataNetwork'
+import AnimatedHeadline from './AnimatedHeadline'
+import EnhancedCTA from './EnhancedCTA'
+import EnhancedScrollIndicator from './EnhancedScrollIndicator'
 
 const HeroSection = () => {
+  const sectionRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  })
+
+  // Parallax transforms for different layers
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
+  const headlineY = useTransform(scrollYProgress, [0, 1], ['0%', '-20%'])
+  const ctaY = useTransform(scrollYProgress, [0, 1], ['0%', '-10%'])
+  const networkY = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
+
+  const scrollToDashboard = () => {
+    const dashboardSection = document.querySelector('[data-section="dashboard"]')
+    if (dashboardSection) {
+      dashboardSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+
+  const scrollToContact = () => {
+    const contactSection = document.querySelector('[data-section="contact"]')
+    if (contactSection) {
+      contactSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -25,160 +62,114 @@ const HeroSection = () => {
     }
   }
 
-  const buttonVariants = {
-    hover: {
-      scale: 1.05,
-      transition: { duration: 0.2 }
-    },
-    tap: {
-      scale: 0.95
-    }
-  }
-
-  const scrollToDashboard = () => {
-    const dashboardSection = document.querySelector('[data-section="dashboard"]')
-    if (dashboardSection) {
-      dashboardSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      })
-    }
-  }
-
-  const scrollToContact = () => {
-    const contactSection = document.querySelector('[data-section="contact"]')
-    if (contactSection) {
-      contactSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      })
-    }
-  }
-
   return (
-    <section className="section relative">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-2 h-2 bg-cyan-500 rounded-full"
-          animate={{
-            scale: [1, 2, 1],
-            opacity: [0.5, 1, 0.5],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div
-          className="absolute top-1/3 right-1/3 w-3 h-3 bg-pink-500 rounded-full"
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.3, 0.8, 0.3],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 left-1/3 w-1 h-1 bg-yellow-500 rounded-full"
-          animate={{
-            scale: [1, 3, 1],
-            opacity: [0.4, 1, 0.4],
-          }}
-          transition={{
-            duration: 2.5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2
-          }}
-        />
-      </div>
+    <section ref={sectionRef} className="section relative min-h-screen overflow-hidden">
+      {/* Ambient Background with Parallax */}
+      <motion.div 
+        className="absolute inset-0"
+        style={{ y: backgroundY }}
+      >
+        <AmbientBackground />
+      </motion.div>
 
+      {/* 3D Data Network with Parallax */}
       <motion.div
-        className="container mx-auto px-4 text-center relative z-10"
+        className="absolute inset-0"
+        style={{ y: networkY }}
+      >
+        <DataNetwork />
+      </motion.div>
+
+      {/* Main Content Container */}
+      <motion.div
+        className="container mx-auto px-4 text-center relative z-10 h-screen flex flex-col justify-center items-center"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        {/* Main Headline */}
-        <motion.h1
-          className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6 text-white"
-          variants={itemVariants}
+        {/* Animated Headline with Parallax */}
+        <motion.div
+          className="mb-8"
+          style={{ y: headlineY }}
         >
-          <span className="gradient-text">Empower Your Business</span>
-          <br />
-          <span className="text-white">with Smart Data Solutions</span>
-        </motion.h1>
+          <AnimatedHeadline />
+        </motion.div>
 
-        {/* Subtext */}
+        {/* Subtext with Enhanced Animations */}
         <motion.p
           className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed"
           variants={itemVariants}
         >
-          From <span className="text-cyan-500 font-semibold">Excel</span> to{' '}
-          <span className="text-pink-500 font-semibold">Insights</span> – we{' '}
-          <span className="text-yellow-500 font-semibold">automate</span>,{' '}
-          <span className="text-green-500 font-semibold">visualize</span>, and{' '}
-          <span className="gradient-text font-semibold">simplify</span>.
+          From <motion.span 
+            className="text-cyan-500 font-semibold"
+            whileHover={{ 
+              textShadow: "0 0 20px rgba(6, 182, 212, 0.8)",
+              scale: 1.05
+            }}
+            transition={{ duration: 0.3 }}
+          >Excel</motion.span> to{' '}
+          <motion.span 
+            className="text-pink-500 font-semibold"
+            whileHover={{ 
+              textShadow: "0 0 20px rgba(236, 72, 153, 0.8)",
+              scale: 1.05
+            }}
+            transition={{ duration: 0.3 }}
+          >Insights</motion.span> – we{' '}
+          <motion.span 
+            className="text-yellow-500 font-semibold"
+            whileHover={{ 
+              textShadow: "0 0 20px rgba(234, 179, 8, 0.8)",
+              scale: 1.05
+            }}
+            transition={{ duration: 0.3 }}
+          >automate</motion.span>,{' '}
+          <motion.span 
+            className="text-green-500 font-semibold"
+            whileHover={{ 
+              textShadow: "0 0 20px rgba(34, 197, 94, 0.8)",
+              scale: 1.05
+            }}
+            transition={{ duration: 0.3 }}
+          >visualize</motion.span>, and{' '}
+          <motion.span 
+            className="gradient-text font-semibold"
+            whileHover={{ 
+              textShadow: "0 0 30px rgba(6, 182, 212, 0.8)",
+              scale: 1.05
+            }}
+            transition={{ duration: 0.3 }}
+          >simplify</motion.span>.
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* Enhanced CTA Buttons with Parallax */}
         <motion.div
-          className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
+          style={{ y: ctaY }}
           variants={itemVariants}
         >
-          <motion.button
-            className="btn-primary flex items-center gap-3 group"
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            onClick={scrollToContact}
-          >
-            <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform" />
-            💬 Get Free Consultation
-          </motion.button>
-
-          <motion.button
-            className="btn-secondary flex items-center gap-3 group"
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-            onClick={scrollToDashboard}
-          >
-            <BarChart3 className="w-5 h-5 group-hover:scale-110 transition-transform" />
-            📊 View Dashboard Demo
-          </motion.button>
+          <EnhancedCTA 
+            onDashboardClick={scrollToDashboard}
+            onContactClick={scrollToContact}
+          />
         </motion.div>
 
-        {/* Scroll Indicator */}
+        {/* Enhanced Scroll Indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer"
-          animate={{
-            y: [0, 10, 0],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          onClick={scrollToDashboard}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          variants={itemVariants}
         >
-          <ChevronDown className="w-6 h-6 text-white text-opacity-60 hover:text-white transition-colors" />
+          <EnhancedScrollIndicator onClick={scrollToDashboard} />
         </motion.div>
       </motion.div>
 
-      {/* Floating Data Elements */}
+      {/* Floating Data Elements with Enhanced Animation */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className="absolute top-20 right-20 text-xs text-white text-opacity-20 font-mono"
           animate={{
             y: [0, -20, 0],
             opacity: [0.2, 0.5, 0.2],
+            rotate: [0, 5, 0]
           }}
           transition={{
             duration: 8,
@@ -187,9 +178,21 @@ const HeroSection = () => {
           }}
         >
           {Array.from({ length: 10 }, (_, i) => (
-            <div key={i} className="mb-2">
+            <motion.div 
+              key={i} 
+              className="mb-2"
+              animate={{
+                opacity: [0.2, 1, 0.2],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                delay: i * 0.2
+              }}
+            >
               {Math.random().toString(36).substring(7)}
-            </div>
+            </motion.div>
           ))}
         </motion.div>
 
@@ -198,6 +201,7 @@ const HeroSection = () => {
           animate={{
             y: [0, 20, 0],
             opacity: [0.2, 0.5, 0.2],
+            rotate: [0, -5, 0]
           }}
           transition={{
             duration: 10,
@@ -207,12 +211,36 @@ const HeroSection = () => {
           }}
         >
           {Array.from({ length: 8 }, (_, i) => (
-            <div key={i} className="mb-2">
+            <motion.div 
+              key={i} 
+              className="mb-2"
+              animate={{
+                opacity: [0.2, 1, 0.2],
+                scale: [1, 1.1, 1]
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                delay: i * 0.3
+              }}
+            >
               {Math.random().toString(16).substring(2)}
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>
+
+      {/* Burst Effect Trigger */}
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        onAnimationComplete={() => {
+          // Trigger burst effect when section comes into view
+          console.log('Hero section burst effect triggered!')
+        }}
+      />
     </section>
   )
 }
