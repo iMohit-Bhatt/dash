@@ -22,12 +22,12 @@ const HeroSection = () => {
   const scrollToDashboard = () => {
     const dashboardSection = document.querySelector('[data-section="dashboard"]')
     if (dashboardSection) {
-      // Use offsetTop to get the absolute position from the top of the document
-      const targetPosition = dashboardSection.offsetTop
+      // Get the current viewport height
+      const viewportHeight = window.innerHeight
       
-      // Scroll to the exact position where the dashboard section starts
+      // Scroll to position the dashboard section at the top of the viewport
       window.scrollTo({
-        top: targetPosition,
+        top: viewportHeight,
         behavior: 'smooth'
       })
     }
@@ -69,7 +69,7 @@ const HeroSection = () => {
   }
 
   return (
-    <section ref={sectionRef} className="section relative min-h-screen overflow-hidden" data-section="hero">
+    <section ref={sectionRef} className="section relative h-screen overflow-hidden" data-section="hero">
       {/* Ambient Background with Parallax */}
       <motion.div 
         className="absolute inset-0"
@@ -88,7 +88,7 @@ const HeroSection = () => {
 
       {/* Main Content Container */}
       <motion.div
-        className="container mx-auto px-4 text-center relative z-10 min-h-screen flex flex-col justify-center items-center py-20"
+        className="container mx-auto px-4 text-center relative z-10 h-full flex flex-col justify-center items-center"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
