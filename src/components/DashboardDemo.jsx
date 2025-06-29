@@ -13,10 +13,10 @@ const DashboardDemo = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0])
 
   const stats = [
-    { icon: Users, value: "200+", label: "Clients Served", color: "from-yellow-500 to-yellow-400" },
-    { icon: Clock, value: "16+", label: "Years Experience", color: "from-yellow-400 to-yellow-300" },
-    { icon: Award, value: "100%", label: "Client Satisfaction", color: "from-yellow-300 to-yellow-200" },
-    { icon: Zap, value: "24/7", label: "Support Available", color: "from-yellow-200 to-yellow-100" }
+    { icon: Users, value: "200+", label: "Clients Served", color: "from-green-500 to-green-400" },
+    { icon: Clock, value: "16+", label: "Years Experience", color: "from-green-400 to-green-300" },
+    { icon: Award, value: "100%", label: "Client Satisfaction", color: "from-green-300 to-green-200" },
+    { icon: Zap, value: "24/7", label: "Support Available", color: "from-green-200 to-green-100" }
   ]
 
   const services = [
@@ -24,19 +24,19 @@ const DashboardDemo = () => {
       icon: Shield,
       title: "Data Integration",
       description: "Ensuring complete, accurate, and timely data, we integrate and consolidate your business' data sources into a cohesive model, from a few spreadsheets to millions of rows of data.",
-      color: "from-yellow-500 to-yellow-400"
+      color: "from-green-500 to-green-400"
     },
     {
       icon: TrendingUp,
       title: "Data Analysis & Alignment",
       description: "Executing deep data analysis, we turn raw data into valuable business insights, helping you align your data with your goals and initiatives for maximum ROI.",
-      color: "from-yellow-400 to-yellow-300"
+      color: "from-green-400 to-green-300"
     },
     {
       icon: BarChart3,
       title: "Data Visualization",
       description: "We turn static spreadsheets and confusing dashboards into vivid, clear data visualizations that help you better use and understand your data.",
-      color: "from-yellow-300 to-yellow-200"
+      color: "from-green-300 to-green-200"
     }
   ]
 
@@ -66,14 +66,14 @@ const DashboardDemo = () => {
   return (
     <section ref={sectionRef} className="section-warm relative py-32 overflow-hidden" data-section="dashboard">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-yellow-900/5 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-900/5 to-transparent" />
       
       {/* Floating Particles */}
       <div className="absolute inset-0 pointer-events-none">
         {Array.from({ length: 20 }, (_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-yellow-400/30 rounded-full"
+            className="absolute w-1 h-1 bg-green-400/30 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -104,8 +104,8 @@ const DashboardDemo = () => {
         >
           <motion.div variants={itemVariants} className="mb-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 glass-warm rounded-full mb-6">
-              <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
-              <span className="text-yellow-100 text-sm font-medium tracking-wide">Trusted by 200+ Clients</span>
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-green-100 text-sm font-medium tracking-wide">Trusted by 200+ Clients</span>
             </div>
           </motion.div>
 
@@ -117,10 +117,10 @@ const DashboardDemo = () => {
           </motion.h2>
 
           <motion.p 
-            className="text-xl text-yellow-50 mb-12 max-w-3xl mx-auto leading-relaxed font-body"
+            className="text-xl text-gray-50 mb-12 max-w-3xl mx-auto leading-relaxed font-body"
             variants={itemVariants}
           >
-            Partner with former <span className="text-yellow-400 font-semibold">BCG, McKinsey, and Bain</span> Analytics Consultants.
+            Partner with former <span className="text-green-400 font-semibold">BCG, McKinsey, and Bain</span> Analytics Consultants.
           </motion.p>
         </motion.div>
 
@@ -141,16 +141,16 @@ const DashboardDemo = () => {
               <motion.div
                 className="w-16 h-16 mx-auto mb-4 glass-warm rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
                 whileHover={{ 
-                  boxShadow: "0 0 30px rgba(212, 175, 55, 0.3)",
+                  boxShadow: "0 0 30px rgba(43, 182, 115, 0.3)",
                   transition: { duration: 0.3 }
                 }}
               >
-                <stat.icon className="w-8 h-8 text-yellow-400" />
+                <stat.icon className="w-8 h-8 text-green-400" />
               </motion.div>
               <div className={`text-3xl font-bold mb-2 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
                 {stat.value}
               </div>
-              <div className="text-yellow-200 text-sm font-medium">{stat.label}</div>
+              <div className="text-green-200 text-sm font-medium">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
@@ -174,20 +174,20 @@ const DashboardDemo = () => {
               }}
             >
               <motion.div
-                className={`w-16 h-16 mb-6 bg-gradient-to-r ${service.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                className="w-16 h-16 mx-auto mb-6 glass-warm rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
                 whileHover={{ 
-                  boxShadow: "0 0 30px rgba(212, 175, 55, 0.4)",
+                  boxShadow: `0 0 30px ${service.glowColor}`,
                   transition: { duration: 0.3 }
                 }}
               >
-                <service.icon className="w-8 h-8 text-white" />
+                <service.icon className="w-8 h-8 text-green-400" />
               </motion.div>
               
-              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-yellow-200 transition-colors duration-300">
+              <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-green-200 transition-colors duration-300">
                 {service.title}
               </h3>
               
-              <p className="text-yellow-50 leading-relaxed font-body">
+              <p className="text-green-50 leading-relaxed font-body">
                 {service.description}
               </p>
 
@@ -196,7 +196,7 @@ const DashboardDemo = () => {
                 {Array.from({ length: 3 }, (_, i) => (
                   <motion.div
                     key={i}
-                    className="absolute w-1 h-1 bg-yellow-400 rounded-full"
+                    className="absolute w-1 h-1 bg-green-400 rounded-full"
                     style={{
                       left: `${20 + i * 30}%`,
                       top: `${20 + i * 20}%`,
@@ -238,7 +238,7 @@ const DashboardDemo = () => {
               
               {/* Animated Background */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-yellow-600 to-yellow-500 rounded-full"
+                className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-500 rounded-full"
                 initial={{ scale: 0 }}
                 whileHover={{ scale: 1 }}
                 transition={{ duration: 0.3 }}

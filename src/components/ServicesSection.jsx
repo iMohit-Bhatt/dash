@@ -50,10 +50,10 @@ const ServicesSection = () => {
       title: "Data Cleaning & Automation",
       description: "Automate your data workflows with intelligent cleaning, validation, and transformation processes.",
       features: ["Automated workflows", "Data validation", "Error handling", "Scheduled updates"],
-      color: "from-yellow-400 to-orange-500",
-      bgColor: "bg-yellow-500/10",
-      borderColor: "border-yellow-500/30",
-      glowColor: "rgba(234, 179, 8, 0.3)"
+      color: "from-green-400 to-green-500",
+      bgColor: "bg-green-500/10",
+      borderColor: "border-green-500/30",
+      glowColor: "rgba(34, 197, 94, 0.3)"
     },
     {
       icon: Activity,
@@ -160,17 +160,17 @@ const ServicesSection = () => {
             }}
           />
           <motion.div
-            className="absolute top-1/2 left-1/2 w-72 h-72 bg-gradient-to-r from-green-500/20 to-yellow-500/20 rounded-full blur-3xl"
+            className="absolute top-1/2 left-1/2 w-72 h-72 bg-gradient-to-r from-green-500/20 to-green-600/20 rounded-full blur-3xl"
             animate={{
               x: [0, 30, 0],
               y: [0, -50, 0],
               scale: [1, 1.3, 1]
             }}
             transition={{
-              duration: 12,
+              duration: 8,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: 4
+              delay: 6
             }}
           />
         </div>

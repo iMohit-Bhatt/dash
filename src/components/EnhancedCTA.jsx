@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { ArrowRight, Play, Sparkles } from 'lucide-react'
+import { ArrowRight, Play, Sparkles, Phone, BarChart3 } from 'lucide-react'
 
 const EnhancedCTA = ({ onDashboardClick, onContactClick }) => {
   const [hoveredButton, setHoveredButton] = useState(null)
@@ -52,16 +52,20 @@ const EnhancedCTA = ({ onDashboardClick, onContactClick }) => {
     return Array.from({ length: count }, (_, i) => (
       <motion.div
         key={i}
-        className="absolute w-1 h-1 bg-amber-400 rounded-full"
+        className="absolute w-1 h-1 bg-green-400 rounded-full"
         style={{
           left: `${Math.random() * 100}%`,
           top: `${Math.random() * 100}%`,
         }}
-        variants={sparkleVariants}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        transition={{ delay: i * 0.1 }}
+        animate={{
+          scale: [0, 1, 0],
+          opacity: [0, 1, 0]
+        }}
+        transition={{
+          duration: 1,
+          repeat: Infinity,
+          delay: i * 0.1
+        }}
       />
     ))
   }
@@ -70,55 +74,47 @@ const EnhancedCTA = ({ onDashboardClick, onContactClick }) => {
     <div className="flex flex-col sm:flex-row gap-6 items-center justify-center">
       {/* Get Free Consultation Button */}
       <motion.button
-        className="relative group px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
-        variants={buttonVariants}
-        initial="initial"
-        whileHover="hover"
-        whileTap="tap"
+        className="relative group px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         onHoverStart={() => setHoveredButton('contact')}
         onHoverEnd={() => setHoveredButton(null)}
         onClick={onContactClick}
       >
-        {/* Animated Rings */}
+        {/* Animated Borders */}
         <motion.div
-          className="absolute inset-0 border-2 border-amber-400 rounded-full"
-          variants={ringVariants}
-          initial="initial"
-          animate="animate"
+          className="absolute inset-0 border-2 border-green-400 rounded-full"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute inset-0 border-2 border-orange-400 rounded-full"
-          variants={ringVariants}
-          initial="initial"
-          animate="animate"
-          transition={{ delay: 0.2 }}
+          className="absolute inset-0 border-2 border-green-500 rounded-full"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute inset-0 border-2 border-red-400 rounded-full"
-          variants={ringVariants}
-          initial="initial"
-          animate="animate"
-          transition={{ delay: 0.4 }}
+          className="absolute inset-0 border-2 border-green-600 rounded-full"
+          animate={{ rotate: 180 }}
+          transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
         />
 
         {/* Sparkles */}
         {hoveredButton === 'contact' && generateSparkles()}
 
-        {/* Button Content */}
-        <div className="relative z-10 flex items-center gap-2">
-          <span>Get Free Consultation</span>
-          <motion.div
-            animate={{ x: hoveredButton === 'contact' ? 5 : 0 }}
-            transition={{ duration: 0.2 }}
-          >
-            <ArrowRight className="w-4 h-4" />
-          </motion.div>
-        </div>
+        {/* Content */}
+        <motion.span 
+          className="relative z-10 flex items-center gap-2"
+          animate={{ x: hoveredButton === 'contact' ? 5 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <Phone className="w-5 h-5" />
+          Get Free Consultation
+        </motion.span>
 
-        {/* Hover Glow */}
+        {/* Glow Effect */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full opacity-0 blur-xl"
-          animate={{ 
+          className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-500 rounded-full opacity-0 blur-xl"
+          animate={{
             opacity: hoveredButton === 'contact' ? 0.3 : 0,
             scale: hoveredButton === 'contact' ? 1.2 : 1
           }}
@@ -128,55 +124,47 @@ const EnhancedCTA = ({ onDashboardClick, onContactClick }) => {
 
       {/* View Dashboard Demo Button */}
       <motion.button
-        className="relative group px-8 py-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
-        variants={buttonVariants}
-        initial="initial"
-        whileHover="hover"
-        whileTap="tap"
+        className="relative group px-8 py-4 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         onHoverStart={() => setHoveredButton('dashboard')}
         onHoverEnd={() => setHoveredButton(null)}
         onClick={onDashboardClick}
       >
-        {/* Animated Rings */}
+        {/* Animated Borders */}
         <motion.div
-          className="absolute inset-0 border-2 border-orange-400 rounded-full"
-          variants={ringVariants}
-          initial="initial"
-          animate="animate"
+          className="absolute inset-0 border-2 border-green-500 rounded-full"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute inset-0 border-2 border-red-400 rounded-full"
-          variants={ringVariants}
-          initial="initial"
-          animate="animate"
-          transition={{ delay: 0.2 }}
+          className="absolute inset-0 border-2 border-green-600 rounded-full"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute inset-0 border-2 border-amber-400 rounded-full"
-          variants={ringVariants}
-          initial="initial"
-          animate="animate"
-          transition={{ delay: 0.4 }}
+          className="absolute inset-0 border-2 border-green-700 rounded-full"
+          animate={{ rotate: 180 }}
+          transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
         />
 
         {/* Sparkles */}
         {hoveredButton === 'dashboard' && generateSparkles()}
 
-        {/* Button Content */}
-        <div className="relative z-10 flex items-center gap-2">
-          <motion.div
-            animate={{ rotate: hoveredButton === 'dashboard' ? 360 : 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <Play className="w-4 h-4" />
-          </motion.div>
-          <span>View Dashboard Demo</span>
-        </div>
+        {/* Content */}
+        <motion.span 
+          className="relative z-10 flex items-center gap-2"
+          animate={{ rotate: hoveredButton === 'dashboard' ? 360 : 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <BarChart3 className="w-5 h-5" />
+          View Dashboard Demo
+        </motion.span>
 
-        {/* Hover Glow */}
+        {/* Glow Effect */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-orange-400 to-red-400 rounded-full opacity-0 blur-xl"
-          animate={{ 
+          className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-full opacity-0 blur-xl"
+          animate={{
             opacity: hoveredButton === 'dashboard' ? 0.3 : 0,
             scale: hoveredButton === 'dashboard' ? 1.2 : 1
           }}

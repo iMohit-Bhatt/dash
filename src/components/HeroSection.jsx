@@ -98,10 +98,7 @@ const HeroSection = () => {
           className="mb-8"
           variants={itemVariants}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 glass-warm rounded-full">
-            <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
-            <span className="text-yellow-100 text-sm font-medium tracking-wide">Data Solutions Agency</span>
-          </div>
+          {/* Removed Data Solutions Agency badge as requested */}
         </motion.div>
 
         {/* Animated Headline with Parallax */}
@@ -114,37 +111,37 @@ const HeroSection = () => {
 
         {/* Sophisticated Subtext */}
         <motion.p
-          className="text-xl md:text-2xl text-yellow-50 mb-12 max-w-4xl mx-auto leading-relaxed font-body"
+          className="text-xl md:text-2xl text-gray-50 mb-12 max-w-4xl mx-auto leading-relaxed font-body"
           variants={itemVariants}
         >
           From <motion.span 
-            className="text-yellow-400 font-semibold"
+            className="text-green-400 font-semibold"
             whileHover={{ 
-              textShadow: "0 0 20px rgba(212, 175, 55, 0.8)",
+              textShadow: "0 0 20px rgba(43, 182, 115, 0.8)",
               scale: 1.05
             }}
             transition={{ duration: 0.3 }}
           >Excel</motion.span> to{' '}
           <motion.span 
-            className="text-yellow-300 font-semibold"
+            className="text-green-300 font-semibold"
             whileHover={{ 
-              textShadow: "0 0 20px rgba(205, 127, 50, 0.8)",
+              textShadow: "0 0 20px rgba(27, 149, 111, 0.8)",
               scale: 1.05
             }}
             transition={{ duration: 0.3 }}
           >Insights</motion.span> – we{' '}
           <motion.span 
-            className="text-yellow-200 font-semibold"
+            className="text-green-200 font-semibold"
             whileHover={{ 
-              textShadow: "0 0 20px rgba(184, 115, 51, 0.8)",
+              textShadow: "0 0 20px rgba(59, 177, 134, 0.8)",
               scale: 1.05
             }}
             transition={{ duration: 0.3 }}
           >automate</motion.span>,{' '}
           <motion.span 
-            className="text-yellow-100 font-semibold"
+            className="text-green-100 font-semibold"
             whileHover={{ 
-              textShadow: "0 0 20px rgba(212, 175, 55, 0.8)",
+              textShadow: "0 0 20px rgba(43, 182, 115, 0.8)",
               scale: 1.05
             }}
             transition={{ duration: 0.3 }}
@@ -152,7 +149,7 @@ const HeroSection = () => {
           <motion.span 
             className="gradient-text-gold font-semibold"
             whileHover={{ 
-              textShadow: "0 0 30px rgba(212, 175, 55, 0.8)",
+              textShadow: "0 0 30px rgba(43, 182, 115, 0.8)",
               scale: 1.05
             }}
             transition={{ duration: 0.3 }}
@@ -182,7 +179,7 @@ const HeroSection = () => {
       {/* Floating Data Elements with Enhanced Animation */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          className="absolute top-20 right-20 text-xs text-yellow-300 text-opacity-30 font-mono"
+          className="absolute top-20 right-20 text-xs text-green-300 text-opacity-30 font-mono"
           animate={{
             y: [0, -20, 0],
             opacity: [0.2, 0.5, 0.2],
@@ -214,7 +211,7 @@ const HeroSection = () => {
         </motion.div>
 
         <motion.div
-          className="absolute bottom-20 left-20 text-xs text-yellow-200 text-opacity-30 font-mono"
+          className="absolute bottom-20 left-20 text-xs text-green-200 text-opacity-30 font-mono"
           animate={{
             y: [0, 20, 0],
             opacity: [0.2, 0.5, 0.2],

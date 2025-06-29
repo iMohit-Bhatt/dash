@@ -63,16 +63,16 @@ const Testimonials = () => {
 
     for (let i = 0; i < fullStars; i++) {
       stars.push(
-        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+        <Star key={i} className="w-4 h-4 fill-green-400 text-green-400" />
       )
     }
 
     if (hasHalfStar) {
       stars.push(
         <div key="half" className="relative">
-          <Star className="w-4 h-4 text-yellow-400" />
+          <Star className="w-4 h-4 text-green-400" />
           <div className="absolute inset-0 w-1/2 overflow-hidden">
-            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+            <Star className="w-4 h-4 fill-green-400 text-green-400" />
           </div>
         </div>
       )
@@ -81,7 +81,7 @@ const Testimonials = () => {
     const emptyStars = 5 - Math.ceil(rating)
     for (let i = 0; i < emptyStars; i++) {
       stars.push(
-        <Star key={`empty-${i}`} className="w-4 h-4 text-yellow-400/30" />
+        <Star key={`empty-${i}`} className="w-4 h-4 text-green-400/30" />
       )
     }
 
@@ -91,14 +91,14 @@ const Testimonials = () => {
   return (
     <section className="section-warm relative py-32 overflow-hidden">
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-yellow-900/5 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-900/5 to-transparent" />
       
       {/* Floating Quote Icons */}
       <div className="absolute inset-0 pointer-events-none">
         {Array.from({ length: 8 }, (_, i) => (
           <motion.div
             key={i}
-            className="absolute text-yellow-400/10"
+            className="absolute text-green-400/10"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -131,8 +131,8 @@ const Testimonials = () => {
         >
           <motion.div variants={itemVariants} className="mb-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 glass-warm rounded-full">
-              <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
-              <span className="text-yellow-100 text-sm font-medium tracking-wide">Client Success Stories</span>
+              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <span className="text-green-100 text-sm font-medium tracking-wide">Client Success Stories</span>
             </div>
           </motion.div>
 
@@ -144,7 +144,7 @@ const Testimonials = () => {
           </motion.h2>
 
           <motion.p 
-            className="text-xl text-yellow-50 max-w-3xl mx-auto leading-relaxed font-body"
+            className="text-xl text-gray-50 max-w-3xl mx-auto leading-relaxed font-body"
             variants={itemVariants}
           >
             Here's what makes Data Family truly unique. It's not just about gaining more value from your data.
@@ -171,7 +171,7 @@ const Testimonials = () => {
             >
               {/* Quote Icon */}
               <motion.div
-                className="absolute top-6 right-6 text-yellow-400/20 group-hover:text-yellow-400/40 transition-colors duration-300"
+                className="absolute top-6 right-6 text-green-400/20 group-hover:text-green-400/40 transition-colors duration-300"
                 animate={{
                   scale: [1, 1.1, 1],
                   rotate: [0, 5, 0]
@@ -188,23 +188,23 @@ const Testimonials = () => {
               {/* Rating */}
               <div className="flex items-center gap-1 mb-4">
                 {renderStars(testimonial.rating)}
-                <span className="ml-2 text-yellow-200 text-sm font-medium">
+                <span className="ml-2 text-green-200 text-sm font-medium">
                   {testimonial.rating}
                 </span>
               </div>
 
               {/* Content */}
-              <p className="text-yellow-50 leading-relaxed font-body mb-6 text-lg">
+              <p className="text-green-50 leading-relaxed font-body mb-6 text-lg">
                 "{testimonial.content}"
               </p>
 
               {/* Author */}
               <div className="flex items-center gap-4">
                 <motion.div
-                  className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full flex items-center justify-center text-white font-bold text-lg"
+                  className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-400 rounded-full flex items-center justify-center text-white font-bold text-lg"
                   whileHover={{ 
                     scale: 1.1,
-                    boxShadow: "0 0 20px rgba(212, 175, 55, 0.4)",
+                    boxShadow: "0 0 20px rgba(43, 182, 115, 0.4)",
                     transition: { duration: 0.3 }
                   }}
                 >
@@ -212,7 +212,7 @@ const Testimonials = () => {
                 </motion.div>
                 <div>
                   <div className="text-white font-semibold">{testimonial.name}</div>
-                  <div className="text-yellow-300 text-sm">{testimonial.role}</div>
+                  <div className="text-green-300 text-sm">{testimonial.role}</div>
                 </div>
               </div>
 
@@ -221,7 +221,7 @@ const Testimonials = () => {
                 {Array.from({ length: 4 }, (_, i) => (
                   <motion.div
                     key={i}
-                    className="absolute w-1 h-1 bg-yellow-400 rounded-full"
+                    className="absolute w-1 h-1 bg-green-400 rounded-full"
                     style={{
                       left: `${15 + i * 25}%`,
                       top: `${20 + i * 15}%`,
@@ -241,9 +241,9 @@ const Testimonials = () => {
 
               {/* Gradient Border Effect */}
               <motion.div
-                className="absolute inset-0 rounded-2xl bg-gradient-to-r from-yellow-400/20 to-yellow-300/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400/20 to-green-300/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
-                  background: 'linear-gradient(45deg, transparent 30%, rgba(212, 175, 55, 0.1) 50%, transparent 70%)',
+                  background: 'linear-gradient(45deg, transparent 30%, rgba(43, 182, 115, 0.1) 50%, transparent 70%)',
                   backgroundSize: '200% 200%'
                 }}
                 animate={{
@@ -280,7 +280,7 @@ const Testimonials = () => {
               
               {/* Animated Background */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-yellow-600 to-yellow-500 rounded-full"
+                className="absolute inset-0 bg-gradient-to-r from-green-600 to-green-500 rounded-full"
                 initial={{ scale: 0 }}
                 whileHover={{ scale: 1 }}
                 transition={{ duration: 0.3 }}

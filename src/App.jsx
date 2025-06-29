@@ -5,6 +5,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HeroSection from './components/HeroSection'
 import DashboardDemo from './components/DashboardDemo'
+import DashboardShowcase from './components/DashboardShowcase'
 import ServicesSection from './components/ServicesSection'
 import Testimonials from './components/Testimonials'
 import WhyUsSection from './components/WhyUsSection'
@@ -110,16 +111,17 @@ function App() {
       >
         <div className="absolute inset-0 bg-data-pattern opacity-20"></div>
         <div className="absolute top-0 left-0 w-full h-full">
-          <div className="absolute top-20 left-20 w-72 h-72 bg-yellow-500 bg-opacity-20 rounded-full blur-3xl floating"></div>
-          <div className="absolute top-40 right-20 w-96 h-96 bg-yellow-400 bg-opacity-20 rounded-full blur-3xl floating-delay-1"></div>
-          <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-yellow-300 bg-opacity-20 rounded-full blur-3xl floating-delay-2"></div>
-          <div className="absolute bottom-40 right-1/3 w-64 h-64 bg-yellow-200 bg-opacity-20 rounded-full blur-3xl floating-delay-3"></div>
+          <div className="absolute top-20 left-20 w-72 h-72 bg-green-500 bg-opacity-20 rounded-full blur-3xl floating"></div>
+          <div className="absolute top-40 right-20 w-96 h-96 bg-green-400 bg-opacity-20 rounded-full blur-3xl floating-delay-1"></div>
+          <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-green-300 bg-opacity-20 rounded-full blur-3xl floating-delay-2"></div>
+          <div className="absolute bottom-40 right-1/3 w-64 h-64 bg-green-200 bg-opacity-20 rounded-full blur-3xl floating-delay-3"></div>
         </div>
       </motion.div>
 
       {/* Main Content */}
       <div className="relative z-10">
         <HeroSection />
+        <DashboardShowcase />
         <DashboardDemo />
         <ServicesSection />
         <Testimonials />
@@ -132,7 +134,7 @@ function App() {
 
       {/* Scroll Progress Indicator */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-500 to-yellow-400 origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 to-green-400 origin-left z-50"
         style={{ scaleX: scrollYProgress }}
       />
     </div>
