@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Star, Quote } from 'lucide-react'
+import LottieBackground from './LottieBackground'
 
 const Testimonials = () => {
   const testimonials = [
@@ -89,7 +90,13 @@ const Testimonials = () => {
   }
 
   return (
-    <section className="section-warm relative py-32 overflow-hidden">
+    <section className="relative py-32 overflow-hidden bg-[#002825]">
+      {/* Lottie Background */}
+      <LottieBackground 
+        animationPath="/Header BG ex Json.json"
+        className="opacity-50"
+      />
+      
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-900/5 to-transparent" />
       

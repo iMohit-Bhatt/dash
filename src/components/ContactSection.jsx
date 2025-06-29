@@ -9,8 +9,13 @@ import {
   Linkedin,
   Twitter,
   Github,
-  ArrowRight
+  ArrowRight,
+  Clock,
+  CheckCircle,
+  Facebook,
+  Instagram
 } from 'lucide-react'
+import LottieBackground from './LottieBackground'
 
 const ContactSection = () => {
   const [email, setEmail] = useState('')
@@ -66,7 +71,13 @@ const ContactSection = () => {
   }
 
   return (
-    <section data-section="contact" className="section relative py-20">
+    <section data-section="contact" className="relative py-20 bg-[#002825]">
+      {/* Lottie Background */}
+      <LottieBackground 
+        animationPath="/Header BG ex Json.json"
+        className="opacity-50"
+      />
+      
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div

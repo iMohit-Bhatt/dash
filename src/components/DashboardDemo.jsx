@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { BarChart3, TrendingUp, Users, Target, Zap, Shield, Clock, Award } from 'lucide-react'
+import LottieBackground from './LottieBackground'
 
 const DashboardDemo = () => {
   const sectionRef = useRef(null)
@@ -64,7 +65,13 @@ const DashboardDemo = () => {
   }
 
   return (
-    <section ref={sectionRef} className="section-warm relative py-32 overflow-hidden" data-section="dashboard">
+    <section ref={sectionRef} className="relative py-32 overflow-hidden bg-[#002825]" data-section="dashboard">
+      {/* Lottie Background */}
+      <LottieBackground 
+        animationPath="/Header BG ex Json.json"
+        className="opacity-50"
+      />
+      
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-900/5 to-transparent" />
       

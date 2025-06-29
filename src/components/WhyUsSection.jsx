@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { Clock, DollarSign, Target, Zap, Shield, Users, Sparkles } from 'lucide-react'
+import LottieBackground from './LottieBackground'
 
 const WhyUsSection = () => {
   const sectionRef = useRef(null)
@@ -139,58 +140,13 @@ const WhyUsSection = () => {
   }
 
   return (
-    <section ref={sectionRef} className="section relative py-20 overflow-hidden" data-section="why-us">
-      {/* Ambient Background */}
-      <motion.div 
-        className="absolute inset-0"
-        style={{ y: backgroundY }}
-      >
-        <div className="absolute inset-0">
-          {/* Animated gradient orbs */}
-          <motion.div
-            className="absolute top-1/3 left-1/3 w-80 h-80 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-full blur-3xl"
-            animate={{
-              x: [0, 40, 0],
-              y: [0, -40, 0],
-              scale: [1, 1.3, 1]
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute bottom-1/3 right-1/3 w-96 h-96 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-full blur-3xl"
-            animate={{
-              x: [0, -50, 0],
-              y: [0, 30, 0],
-              scale: [1, 1.2, 1]
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 3
-            }}
-          />
-          <motion.div
-            className="absolute top-1/2 left-1/2 w-72 h-72 bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-full blur-3xl"
-            animate={{
-              x: [0, 30, 0],
-              y: [0, -60, 0],
-              scale: [1, 1.4, 1]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 6
-            }}
-          />
-        </div>
-      </motion.div>
-
+    <section ref={sectionRef} className="relative py-20 overflow-hidden bg-[#002825]" data-section="why-us">
+      {/* Lottie Background */}
+      <LottieBackground 
+        animationPath="/Header BG ex Json.json"
+        className="opacity-50"
+      />
+      
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div

@@ -1,6 +1,7 @@
 import { motion, useInView, useScroll, useTransform, useSpring } from 'framer-motion'
 import { useRef, useEffect, useState } from 'react'
 import { Download, Calendar } from 'lucide-react'
+import LottieBackground from './LottieBackground'
 
 const METRICS = [
   { label: 'Total Visits', value: 191158, budget: 203645, lastYear: 187677, color: 'text-green-400' },
@@ -91,6 +92,12 @@ const DashboardShowcase = () => {
 
   return (
     <section ref={sectionRef} className="section-warm relative py-16 flex justify-center items-center min-h-[600px] bg-[#002825]">
+      {/* Lottie Background */}
+      <LottieBackground 
+        animationPath="/Header BG ex Json.json"
+        className="opacity-50"
+      />
+      
       <motion.div
         style={{ boxShadow: '0 8px 48px rgba(43, 182, 115, 0.2)', scale }}
         className="relative rounded-3xl border border-green-900 bg-[#002825] shadow-2xl max-w-6xl w-full flex flex-col md:flex-row overflow-hidden"
