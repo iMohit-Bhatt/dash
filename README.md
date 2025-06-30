@@ -1,6 +1,6 @@
-# Data Solutions Agency Website
+# The Data Family Website
 
-A stunning, interactive single-page website for a Data Solutions Agency that offers services like Excel-based Dashboards, Data Cleaning, Visualization, and Reporting Automation.
+A stunning, interactive single-page website for a The Data Family that offers services like Excel-based Dashboards, Data Cleaning, Visualization, and Reporting Automation.
 
 ## 🚀 Features
 
