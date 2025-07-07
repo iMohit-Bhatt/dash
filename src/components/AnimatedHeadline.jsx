@@ -5,11 +5,11 @@ const AnimatedHeadline = () => {
   const [hoveredWord, setHoveredWord] = useState(null)
 
   const words = [
-    { text: "Transform", color: "from-green-500 to-green-400" },
-    { text: "Your", color: "from-green-400 to-green-300" },
-    { text: "Data", color: "from-green-300 to-green-200" },
-    { text: "Into", color: "from-green-200 to-green-100" },
-    { text: "Insights", color: "from-green-100 to-green-50" }
+    { text: "Transform", color: "from-white to-blue-50" },
+    { text: "Your", color: "from-blue-50 to-blue-100" },
+    { text: "Data", color: "from-blue-100 to-blue-200" },
+    { text: "Into", color: "from-blue-200 to-white" },
+    { text: "Insights", color: "from-white to-blue-50" }
   ]
 
   const wordVariants = {
@@ -72,7 +72,7 @@ const AnimatedHeadline = () => {
           
           {/* Underline Effect */}
           <motion.div
-            className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-green-500 to-green-400 rounded-full"
+            className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-white to-blue-200 rounded-full"
             initial={{ width: 0, opacity: 0 }}
             whileHover={{ width: "100%", opacity: 1 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
@@ -82,14 +82,14 @@ const AnimatedHeadline = () => {
           {hoveredWord === index && (
             <>
               <motion.div
-                className="absolute -top-2 -right-2 w-2 h-2 bg-green-400 rounded-full"
+                className="absolute -top-2 -right-2 w-2 h-2 bg-white rounded-full"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0, opacity: 0 }}
                 transition={{ duration: 0.2 }}
               />
               <motion.div
-                className="absolute -bottom-1 -left-1 w-1 h-1 bg-green-300 rounded-full"
+                className="absolute -bottom-1 -left-1 w-1 h-1 bg-blue-200 rounded-full"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0, opacity: 0 }}

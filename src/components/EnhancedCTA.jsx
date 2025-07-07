@@ -52,7 +52,7 @@ const EnhancedCTA = ({ onDashboardClick, onContactClick }) => {
     return Array.from({ length: count }, (_, i) => (
       <motion.div
         key={i}
-        className="absolute w-1 h-1 bg-green-400 rounded-full"
+        className="absolute w-1 h-1 bg-white rounded-full"
         style={{
           left: `${Math.random() * 100}%`,
           top: `${Math.random() * 100}%`,
@@ -74,7 +74,7 @@ const EnhancedCTA = ({ onDashboardClick, onContactClick }) => {
     <div className="flex flex-col sm:flex-row gap-6 items-center justify-center">
       {/* Get Free Consultation Button */}
       <motion.button
-        className="relative group px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+        className="relative group px-8 py-4 bg-white text-blue-700 font-semibold rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onHoverStart={() => setHoveredButton('contact')}
@@ -83,17 +83,17 @@ const EnhancedCTA = ({ onDashboardClick, onContactClick }) => {
       >
         {/* Animated Borders */}
         <motion.div
-          className="absolute inset-0 border-2 border-green-400 rounded-full"
+          className="absolute inset-0 border-2 border-gray-200 rounded-full"
           animate={{ rotate: 360 }}
           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute inset-0 border-2 border-green-500 rounded-full"
+          className="absolute inset-0 border-2 border-gray-300 rounded-full"
           animate={{ rotate: -360 }}
           transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute inset-0 border-2 border-green-600 rounded-full"
+          className="absolute inset-0 border-2 border-gray-400 rounded-full"
           animate={{ rotate: 180 }}
           transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
         />
@@ -113,7 +113,7 @@ const EnhancedCTA = ({ onDashboardClick, onContactClick }) => {
 
         {/* Glow Effect */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-500 rounded-full opacity-0 blur-xl"
+          className="absolute inset-0 bg-white rounded-full opacity-0 blur-xl"
           animate={{
             opacity: hoveredButton === 'contact' ? 0.3 : 0,
             scale: hoveredButton === 'contact' ? 1.2 : 1
@@ -124,7 +124,7 @@ const EnhancedCTA = ({ onDashboardClick, onContactClick }) => {
 
       {/* View Dashboard Demo Button */}
       <motion.button
-        className="relative group px-8 py-4 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
+        className="relative group px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onHoverStart={() => setHoveredButton('dashboard')}
@@ -133,17 +133,17 @@ const EnhancedCTA = ({ onDashboardClick, onContactClick }) => {
       >
         {/* Animated Borders */}
         <motion.div
-          className="absolute inset-0 border-2 border-green-500 rounded-full"
+          className="absolute inset-0 border-2 border-white/40 rounded-full"
           animate={{ rotate: -360 }}
           transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute inset-0 border-2 border-green-600 rounded-full"
+          className="absolute inset-0 border-2 border-white/50 rounded-full"
           animate={{ rotate: 360 }}
           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute inset-0 border-2 border-green-700 rounded-full"
+          className="absolute inset-0 border-2 border-white/60 rounded-full"
           animate={{ rotate: 180 }}
           transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
         />
@@ -163,7 +163,7 @@ const EnhancedCTA = ({ onDashboardClick, onContactClick }) => {
 
         {/* Glow Effect */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-green-500 to-green-600 rounded-full opacity-0 blur-xl"
+          className="absolute inset-0 bg-white rounded-full opacity-0 blur-xl"
           animate={{
             opacity: hoveredButton === 'dashboard' ? 0.3 : 0,
             scale: hoveredButton === 'dashboard' ? 1.2 : 1

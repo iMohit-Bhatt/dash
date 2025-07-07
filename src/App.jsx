@@ -1,16 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HeroSection from './components/HeroSection'
-import DashboardDemo from './components/DashboardDemo'
 import DashboardShowcase from './components/DashboardShowcase'
-import ServicesSection from './components/ServicesSection'
-import Testimonials from './components/Testimonials'
-import WhyUsSection from './components/WhyUsSection'
-import ContactSection from './components/ContactSection'
-import FloatingCTA from './components/FloatingCTA'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -122,21 +116,7 @@ function App() {
       <div className="relative z-10">
         <HeroSection />
         <DashboardShowcase />
-        <DashboardDemo />
-        <ServicesSection />
-        <Testimonials />
-        <WhyUsSection />
-        <ContactSection />
       </div>
-
-      {/* Floating CTA */}
-      <FloatingCTA />
-
-      {/* Scroll Progress Indicator */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 to-green-400 origin-left z-50"
-        style={{ scaleX: scrollYProgress }}
-      />
     </div>
   )
 }

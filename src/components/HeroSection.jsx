@@ -69,7 +69,7 @@ const HeroSection = () => {
   }
 
   return (
-    <section ref={sectionRef} className="section relative min-h-screen overflow-hidden" data-section="hero">
+    <section ref={sectionRef} className="section relative h-screen overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800" data-section="hero">
       {/* Ambient Background with Parallax */}
       <motion.div 
         className="absolute inset-0"
@@ -86,6 +86,9 @@ const HeroSection = () => {
         <DataNetwork />
       </motion.div>
 
+      {/* Blue Background Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/90 via-blue-700/85 to-blue-800/90" />
+
       {/* Main Content Container */}
       <motion.div
         className="container mx-auto px-4 text-center relative z-10 min-h-screen flex flex-col justify-center items-center"
@@ -93,14 +96,6 @@ const HeroSection = () => {
         initial="hidden"
         animate="visible"
       >
-        {/* Premium Badge */}
-        <motion.div
-          className="mb-8"
-          variants={itemVariants}
-        >
-          {/* Removed Data Solutions Agency badge as requested */}
-        </motion.div>
-
         {/* Animated Headline with Parallax */}
         <motion.div
           className="mb-8"
@@ -111,45 +106,45 @@ const HeroSection = () => {
 
         {/* Sophisticated Subtext */}
         <motion.p
-          className="text-xl md:text-2xl text-gray-50 mb-12 max-w-4xl mx-auto leading-relaxed font-body"
+          className="text-xl md:text-2xl text-white mb-12 max-w-4xl mx-auto leading-relaxed font-body"
           variants={itemVariants}
         >
           From <motion.span 
-            className="text-green-400 font-semibold"
+            className="text-blue-200 font-semibold"
             whileHover={{ 
-              textShadow: "0 0 20px rgba(43, 182, 115, 0.8)",
+              textShadow: "0 0 20px rgba(147, 197, 253, 0.8)",
               scale: 1.05
             }}
             transition={{ duration: 0.3 }}
           >Excel</motion.span> to{' '}
           <motion.span 
-            className="text-green-300 font-semibold"
+            className="text-blue-100 font-semibold"
             whileHover={{ 
-              textShadow: "0 0 20px rgba(27, 149, 111, 0.8)",
+              textShadow: "0 0 20px rgba(191, 219, 254, 0.8)",
               scale: 1.05
             }}
             transition={{ duration: 0.3 }}
           >Insights</motion.span> – we{' '}
           <motion.span 
-            className="text-green-200 font-semibold"
+            className="text-white font-semibold"
             whileHover={{ 
-              textShadow: "0 0 20px rgba(59, 177, 134, 0.8)",
+              textShadow: "0 0 20px rgba(255, 255, 255, 0.8)",
               scale: 1.05
             }}
             transition={{ duration: 0.3 }}
           >automate</motion.span>,{' '}
           <motion.span 
-            className="text-green-100 font-semibold"
+            className="text-blue-50 font-semibold"
             whileHover={{ 
-              textShadow: "0 0 20px rgba(43, 182, 115, 0.8)",
+              textShadow: "0 0 20px rgba(239, 246, 255, 0.8)",
               scale: 1.05
             }}
             transition={{ duration: 0.3 }}
           >visualize</motion.span>, and{' '}
           <motion.span 
-            className="gradient-text-gold font-semibold"
+            className="text-white font-semibold"
             whileHover={{ 
-              textShadow: "0 0 30px rgba(43, 182, 115, 0.8)",
+              textShadow: "0 0 30px rgba(255, 255, 255, 0.8)",
               scale: 1.05
             }}
             transition={{ duration: 0.3 }}
@@ -166,20 +161,12 @@ const HeroSection = () => {
             onContactClick={scrollToContact}
           />
         </motion.div>
-
-        {/* Enhanced Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          variants={itemVariants}
-        >
-          <EnhancedScrollIndicator onClick={scrollToDashboard} />
-        </motion.div>
       </motion.div>
 
       {/* Floating Data Elements with Enhanced Animation */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          className="absolute top-20 right-20 text-xs text-green-300 text-opacity-30 font-mono"
+          className="absolute top-20 right-20 text-xs text-blue-200 text-opacity-40 font-mono"
           animate={{
             y: [0, -20, 0],
             opacity: [0.2, 0.5, 0.2],
@@ -211,7 +198,7 @@ const HeroSection = () => {
         </motion.div>
 
         <motion.div
-          className="absolute bottom-20 left-20 text-xs text-green-200 text-opacity-30 font-mono"
+          className="absolute bottom-20 left-20 text-xs text-blue-100 text-opacity-40 font-mono"
           animate={{
             y: [0, 20, 0],
             opacity: [0.2, 0.5, 0.2],

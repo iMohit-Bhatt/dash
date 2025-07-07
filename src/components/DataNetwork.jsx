@@ -73,7 +73,7 @@ const DataConnections = ({ nodes = 20 }) => {
           itemSize={3}
         />
       </bufferGeometry>
-      <lineBasicMaterial color="#00ffff" opacity={0.3} transparent />
+      <lineBasicMaterial color="#ffffff" opacity={0.8} transparent />
     </lineSegments>
   )
 }
