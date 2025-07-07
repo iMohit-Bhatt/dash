@@ -98,6 +98,14 @@ function App() {
 
   return (
     <div ref={containerRef} className="relative min-h-screen overflow-x-hidden">
+      {/* Logo at the top-left with more space and larger size */}
+      <img src="/logo.png" alt="Logo" className="absolute top-8 left-8 max-h-20 w-auto z-30" style={{ maxWidth: '200px' }} />
+      {/* Faux Navbar at the top-right */}
+      <div className="absolute top-10 right-12 flex gap-8 z-30">
+        <span className="text-white text-lg font-medium hover:underline cursor-pointer transition">How we help</span>
+        <span className="text-white text-lg font-medium hover:underline cursor-pointer transition">Why choose us</span>
+        <span className="text-white text-lg font-medium hover:underline cursor-pointer transition">What client say</span>
+      </div>
       {/* Animated Background */}
       <motion.div 
         className="fixed inset-0 opacity-30"

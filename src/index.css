@@ -43,6 +43,35 @@
   --glass-shadow: rgba(43, 182, 115, 0.15);
 }
 
+@font-face {
+  font-family: 'Altone';
+  src: url('/font/Altone/Altone-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Altone';
+  src: url('/font/Altone/Altone-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Altone';
+  src: url('/font/Altone/Altone-Oblique.ttf') format('truetype');
+  font-weight: 400;
+  font-style: oblique;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Altone';
+  src: url('/font/Altone/Altone-BoldOblique.ttf') format('truetype');
+  font-weight: 700;
+  font-style: oblique;
+  font-display: swap;
+}
+
 /* Base Styles */
 html {
   scroll-behavior: smooth;
@@ -50,7 +79,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Altone', 'Inter', sans-serif;
   background: linear-gradient(135deg, #001a17 0%, #002825 25%, #00332f 50%, #002825 75%, #001a17 100%);
   color: var(--text-white);
   line-height: 1.6;
@@ -61,12 +90,12 @@ body {
 
 /* Premium Typography */
 .font-display {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Altone', 'Playfair Display', serif;
   font-weight: 700;
 }
 
 .font-body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Altone', 'Inter', sans-serif;
   font-weight: 400;
 }
 
