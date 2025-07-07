@@ -5,6 +5,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import HeroSection from './components/HeroSection'
 import DashboardShowcase from './components/DashboardShowcase'
+import TrustedBySection from './components/TrustedBySection'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -124,6 +125,7 @@ function App() {
       <div className="relative z-10">
         <HeroSection />
         <DashboardShowcase />
+        <TrustedBySection />
       </div>
     </div>
   )

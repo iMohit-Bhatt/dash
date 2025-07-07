@@ -379,7 +379,7 @@ const DashboardDemo = () => {
           <motion.div variants={itemVariants} className="mb-6">
             <div className="header-badge inline-flex items-center gap-2 px-4 py-2 glass-warm rounded-full mb-6">
               <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-green-100 text-sm font-medium tracking-wide">Trusted by 200+ Clients</span>
+              <span className="text-green-100 text-sm font-medium tracking-wide">Trusted by + Clients</span>
             </div>
           </motion.div>
 
